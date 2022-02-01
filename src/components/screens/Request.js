@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 function Request() {
   const [state, setState] = useState({
@@ -9,6 +10,7 @@ function Request() {
     body: "",
   });
   const [details, setDetails] = useState([]);
+  const location = useLocation();
 
   const handleChange = (e) => {
     const data = { ...state };
@@ -26,27 +28,26 @@ function Request() {
         body: state.body,
       })
       .then((res) => {
-        setDetails(res.data);
+        setDetails([...details, res.data]);
         console.log(res.data, "res");
       });
   };
 
   let renderItem = () => {
-    return details.map((item) =>
-      (<h1>Shyam</h1>)(
-        <>
-          {/* <h1>{item.userid}</h1> */}
-          <h1>Shyam</h1>
-        </>
-      )
-    );
+    return details.map((item) => (
+      <>
+        <li>{item.userid}</li>
+        <li>{item.title}</li>
+        <li>{item.body}</li>
+      </>
+    ));
   };
 
   return (
     <div>
       <h1>Request</h1>
       <Container>
-        <Form action="post" onChange={handleSubmit}>
+        <Form action="post" onSubmit={handleSubmit}>
           <UserId
             type="number"
             placeholder="UserId"
@@ -67,8 +68,13 @@ function Request() {
           />
           <Button type="submit" />
         </Form>
-        <div>{renderItem}</div>
       </Container>
+      <ul>{renderItem()}</ul>
+      {location.pathname === "/request" ? (
+        <h1>Im in My {location.pathname}</h1>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

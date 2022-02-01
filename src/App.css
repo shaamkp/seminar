@@ -9,5 +9,8 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 p{
-  color: #fff;
+  color: #000;
+}
+ul{
+  list-style: none;
 }

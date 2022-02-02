@@ -1,45 +1,72 @@
 import axios from "axios";
-import { React,  useState } from "react";
+import { React, useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 export default function Put() {
-const updateData  = () => {
-    const data = {
-      userId: "2334",
-      id: "2233",
-      title: "shyam",
-      body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-    };
-    axios
-      .put("https://jsonplaceholder.typicode.com/posts/1", data)
-      .then((data) => {
-        console.log(data.data);
-      });
-}
+  const [users, setUser] = useState([]);
+  const [name, setName] = useState([]);
+  const [body, setBody] = useState([]);
+  const [userId, setUserId] = useState(null);
+  const navigate = useNavigate();
 
-const deletData = () =>{
-    const data = {
-      userId: "2334",
-      id: "2233",
-      title: "shyam",
-      body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-    }
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts/").then((res) => {
+      console.log(res.data);
+      setUser(res.data);
+    });
+  }, []);
 
-    axios.delete("https://jsonplaceholder.typicode.com/posts/1",data)
-    .then((data) =>{
-        console.log(data.data);
-    })
-    .catch((err) =>{
-        console.log(err);
-    })
-}
-      
-   
+  const setID = (id, title, body) => {
+    console.log(id);
+    console.log(title);
+    console.log(body);
+    localStorage.setItem("ID", id);
+    localStorage.setItem("TITLE", title);
+    localStorage.setItem("BODY", body);
+  };
+
+  
+
+  
+  console.log(userId, "================id");
+  console.log(name, "================name");
+  console.log(body, "================bosy");
+
   return (
-    <div>
-      <h1>Put and Delete Request</h1>
-      <p>Welcome to axios Demo</p>
-      <button onClick={updateData}>Update</button>
-      <button onClick={deletData}>Delete</button>
+    <div className="App">
+      <table border="1">
+        <tbody>
+          <tr className="table-head">
+            <td>ID</td>
+            <td>name</td>
+            <td>userid</td>
+            <td>body</td>
+          </tr>
+          {users.map((item, i) => (
+            <tr key={i}>
+              <td>{item.id}</td>
+              <td>{item.title}</td>
+              <td>{item.userId}</td>
+              <td>{item.body}</td>
+              <td>
+                <button className="delete">Delete</button>
+              </td>
+              <td>
+                <Link to="/update">
+                  <button
+                    className="update"
+                    onClick={() => setID(item.id, item.title, item.body)}
+                  >
+                    update
+                  </button>
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div></div>
     </div>
   );
 }

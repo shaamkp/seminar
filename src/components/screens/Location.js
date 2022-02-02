@@ -9,7 +9,7 @@ export default function Location() {
       <div className="main">
         <div className="box">
           <h3>Location</h3>
-          {location.pathname === "/location" ? <h1>Im in My {location.pathname.replace("/","")}</h1> : ""}
+          {location.pathname === "/location" ? <h1>Im in My {location.pathname}</h1> : <h1>Errror</h1>}
         </div>
       </div>
     </>

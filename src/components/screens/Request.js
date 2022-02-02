@@ -22,11 +22,7 @@ function Request() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://jsonplaceholder.typicode.com/posts", {
-        userid: state.userid,
-        title: state.title,
-        body: state.body,
-      })
+      .post("https://jsonplaceholder.typicode.com/posts", state)
       .then((res) => {
         setDetails([...details, res.data]);
         console.log(res.data, "res");
@@ -35,17 +31,21 @@ function Request() {
 
   let renderItem = () => {
     return details.map((item) => (
-      <>
+      <div key={item.id}>
         <li>{item.userid}</li>
         <li>{item.title}</li>
         <li>{item.body}</li>
-      </>
+      </div>
     ));
   };
 
   return (
     <div>
-      <h1>Request</h1>
+      {location.pathname === "/request " ? (
+        <h1>Im in My {location.pathname}</h1>
+      ) : (
+        ""
+      )}
       <Container>
         <Form action="post" onSubmit={handleSubmit}>
           <UserId
@@ -91,6 +91,7 @@ const Form = styled.form`
   flex-direction: column;
   width: 20%;
   margin: 0 auto;
+  margin-top: 20px ;
 `;
 const UserId = styled.input`
   margin-top: 20px;

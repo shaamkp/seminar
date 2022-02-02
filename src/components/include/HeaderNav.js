@@ -22,7 +22,7 @@ function HeaderNav() {
             <NavList to="/getreq">Get Request</NavList>
             <NavList to="/put">Put and Delete</NavList>
             <NavList to="/location">UseLocation</NavList>
-            <NavList to="/user/:username  ">User</NavList>
+            <NavList to="/user  ">User</NavList>
           </Nav>
         </Left>
       </Header>

@@ -14,8 +14,8 @@ function Home() {
   return (
     <div>
       <h1>Home</h1>
-      <button onClick={() => handleNextpage()}>To Request</button>
-      {location.pathname === "/home" ? <h1>Im in My {location.pathname.replace("/","")}</h1> : ""}
+      <button onClick={handleNextpage}>To Request</button>
+      {location.pathname === "/home" ? <h1>Im in My {location.pathname}</h1> : ""}
     </div>
   );
 }

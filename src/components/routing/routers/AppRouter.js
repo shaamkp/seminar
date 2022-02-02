@@ -23,7 +23,6 @@ export default function AppRouter() {
         <Route path="/" element={<HeaderNav />}>
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/request/*" element={<Request />} />
           <Route path="/put" element={<Put />} />
           <Route path="/update" element={<Update />} />
           <Route path="/getreq" element={<GetRequest />} />

@@ -18,7 +18,7 @@ function HeaderNav() {
           <Nav>
             <NavList to="/home">Home</NavList>
             <NavList to="/about">About</NavList>
-            <NavList to="/request">Post Request</NavList>
+            {/* <NavList to="/request">Post Request</NavList> */}
             <NavList to="/getreq">Get Request</NavList>
             <NavList to="/put">Put and Delete</NavList>
             <NavList to="/location">UseLocation</NavList>

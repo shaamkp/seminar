@@ -11,6 +11,7 @@ export default function Put() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    
     axios
       .get(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`)
       .then((res) => {
@@ -30,15 +31,18 @@ export default function Put() {
       });
   }
  
-const postData = () => {
+const postData = (e) => {
+  e.preventDefault();
+  console.log("shyam");
   axios
     .post(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`, {
-      firstName,
-      lastName,
-      checkbox
+      firstName: firstName,
+      lastName: lastName,
+      checkbox: checkbox,
     })
-    .then(() => {
-      navigate({pathname:"/put"});
+    .then((res) => {
+      console.log(res);
+      navigate({ pathname: "/put" });
     });
 };
   const setID = (id, firstName, lastName) => {
@@ -54,7 +58,7 @@ const postData = () => {
         getItems();
       });
   };
-
+console.log(firstName,"...................");
   return (
     <div className="App">
       <table border="1">
@@ -97,7 +101,7 @@ const postData = () => {
           <input type="text" onChange={(e) => setFirstName(e.target.value)} />
           <label className="lastname">Last Name</label>
           <input type="text" onChange={(e) => setLastName(e.target.value)} />
-          <button onClick={postData} type="submit" className="button">
+          <button onClick={(e) => postData(e)}  className="button">
             UPDATE
           </button>
         </form>

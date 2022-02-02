@@ -1,20 +1,19 @@
-input{
+input {
   padding: 10px 25px;
   text-decoration: none;
-  
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-p{
+p {
   color: #000;
 }
-ul{
+ul {
   list-style: none;
 }
-.container{
+.container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,16 +28,26 @@ ul{
   font-size: calc(10px + 2vmin);
   color: white;
 }
-.App{
-  display: flex;
-  text-align: center;
+.App {
   margin-top: 20px;
 }
-button.delete{
+button.delete {
   background: red;
   padding: 10px 20px;
 }
-.update{
+.update {
   background: green;
   padding: 10px 20px;
+}
+.add {
+  margin-top: 100px;
+}
+input{
+  margin-left: 10px;
+}
+.lastname{
+  margin-left: 20px;
+}
+.button{
+  margin-left: 20px;
 }

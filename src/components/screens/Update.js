@@ -1,29 +1,42 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Update() {
-  const [users, setUser] = useState([]);
   const [name, setName] = useState("");
   const [body, setBody] = useState("");
-  const [userId, setUserId] = useState(null);
-
-  const sendData = () => {
-    axios.put(`https://jsonplaceholder.typicode.com/posts/${userId}`, {
-      name,
-      body,
-      userId,
-    });
-  };
+  const [userId, setUserId] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setName(localStorage.getItem("TITLE"));
-    setBody(localStorage.getItem("BODY"));
+    setName(localStorage.getItem("FNAME"));
+    setBody(localStorage.getItem("LNAME"));
     setUserId(localStorage.getItem("ID"));
-  });
+  }, []);
+
+  const sendData = () => {
+      console.log("shyam");
+    axios
+      .put(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData/${userId}`, {
+        firstName: name,
+        lastName: body,
+        userId: userId,
+      })
+      .then((res) => {
+        navigate({ pathname: "/put" });
+        console.log(name, body, userId, "===============================");
+      });
+  };
+
+  
+  console.log(body,"=================body");
 
   return (
     <div>
-      <form action={`https://jsonplaceholder.typicode.com/posts/${userId}`} method="post">
+      <form
+        // action={`https://jsonplaceholder.typicode.com/posts/${userId}`}
+        // method="post"
+      >
         <input
           type="text"
           name="name"
@@ -50,7 +63,7 @@ export default function Update() {
         <br />
       </form>
 
-      <button onClick={sendData}>Update User</button>
+      <button onClick={() => sendData()}>Update User</button>
     </div>
   );
 }

@@ -5,33 +5,55 @@ import styled from "styled-components";
 
 export default function Put() {
   const [users, setUser] = useState([]);
-  const [name, setName] = useState([]);
-  const [body, setBody] = useState([]);
-  const [userId, setUserId] = useState(null);
-  const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [checkbox, setCheckbox] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts/").then((res) => {
-      console.log(res.data);
-      setUser(res.data);
-    });
+    axios
+      .get(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`)
+      .then((res) => {
+        console.log(res.data);
+        setUser(res.data);
+        setFirstName(res.data.firstName);
+        setLastName(res.data.lastName);
+      });
   }, []);
 
-  const setID = (id, title, body) => {
-    console.log(id);
-    console.log(title);
-    console.log(body);
+  const getItems = () =>{
+    axios
+      .get(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`)
+      .then((response) => {
+        console.log(response.data);
+        setUser(response.data);
+      });
+  }
+ 
+const postData = () => {
+  axios
+    .post(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`, {
+      firstName,
+      lastName,
+      checkbox
+    })
+    .then(() => {
+      navigate({pathname:"/put"});
+    });
+};
+  const setID = (id, firstName, lastName) => {
     localStorage.setItem("ID", id);
-    localStorage.setItem("TITLE", title);
-    localStorage.setItem("BODY", body);
+    localStorage.setItem("FNAME", firstName);
+    localStorage.setItem("LNAME", lastName);
   };
 
-  
-
-  
-  console.log(userId, "================id");
-  console.log(name, "================name");
-  console.log(body, "================bosy");
+  const DeleteItems = (id) => {
+    axios
+      .delete(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData/${id}`)
+      .then(() => {
+        getItems();
+      });
+  };
 
   return (
     <div className="App">
@@ -39,24 +61,27 @@ export default function Put() {
         <tbody>
           <tr className="table-head">
             <td>ID</td>
-            <td>name</td>
-            <td>userid</td>
-            <td>body</td>
+            <td>Firstname</td>
+            <td>Last name</td>
+            {/* <td>body</td> */}
           </tr>
           {users.map((item, i) => (
             <tr key={i}>
               <td>{item.id}</td>
-              <td>{item.title}</td>
-              <td>{item.userId}</td>
-              <td>{item.body}</td>
+              <td>{item.firstName}</td>
+              <td>{item.lastName}</td>
               <td>
-                <button className="delete">Delete</button>
+                <button className="delete" onClick={() => DeleteItems(item.id)}>
+                  Delete
+                </button>
               </td>
               <td>
                 <Link to="/update">
                   <button
                     className="update"
-                    onClick={() => setID(item.id, item.title, item.body)}
+                    onClick={() =>
+                      setID(item.id, item.firstName, item.lastName)
+                    }
                   >
                     update
                   </button>
@@ -66,7 +91,17 @@ export default function Put() {
           ))}
         </tbody>
       </table>
-      <div></div>
+      <div className="add">
+        <form>
+          <label>First Name</label>
+          <input type="text" onChange={(e) => setFirstName(e.target.value)} />
+          <label className="lastname">Last Name</label>
+          <input type="text" onChange={(e) => setLastName(e.target.value)} />
+          <button onClick={postData} type="submit" className="button">
+            UPDATE
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

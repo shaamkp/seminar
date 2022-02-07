@@ -9,6 +9,7 @@ export default function Put() {
   const [lastName, setLastName] = useState('');
   const [checkbox, setCheckbox] = useState(false);
   const navigate = useNavigate()
+  const location = useLocation();
 
   useEffect(() => {
     
@@ -42,7 +43,7 @@ const postData = (e) => {
     })
     .then((res) => {
       console.log(res);
-      navigate({ pathname: "/put" });
+      window.location.reload();
     });
 };
   const setID = (id, firstName, lastName) => {

@@ -28,7 +28,7 @@ export default function AppRouter() {
           <Route path="/getreq" element={<GetRequest />} />
           <Route path="/user/" element={<User />} />
           <Route path="/location" element={<Location />} />
-          <Route path="/single/:id" element={<SingleUser />} />
+          <Route path="/users/:id" element={<SingleUser />} />
         </Route>
       </Routes>
     </div>   

@@ -1,13 +1,12 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation} from "react-router-dom";
 
 export default function Update() {
   const [name, setName] = useState("");
   const [body, setBody] = useState("");
   const [userId, setUserId] = useState("");
   const navigate = useNavigate();
-
   useEffect(() => {
     setName(localStorage.getItem("FNAME"));
     setBody(localStorage.getItem("LNAME"));

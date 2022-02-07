@@ -15,7 +15,7 @@ function User() {
   let renderItems = () => {
     return user.map((item) => (
       <li key={item.id}>
-        <Link to={`/single/${item.id}`}>
+        <Link to={`/users/${item.id}`}>
           <img src={item.avatar} alt="Image" />
         </Link>
         <h3>

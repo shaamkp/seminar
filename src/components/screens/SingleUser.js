@@ -15,7 +15,7 @@ function SingleUser() {
 
   return (
     <div>
-      {location.pathname === `/single/${id}` ? (
+      {location.pathname === `/users/${id}` ? (
         <h1>Im in  {location.pathname}</h1>
       ) : (
         ""
